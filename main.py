@@ -1,4 +1,3 @@
-import products
 from store import Store
 from products import Product
 
@@ -45,7 +44,7 @@ def start(store: Store):
 
                 try:
                     product_index = int(product_choice) - 1
-                    if not (0 <= product_index < len(products)):
+                    if not 0 <= product_index < len(products):
                         print("Invalid product number.")
                         continue
 

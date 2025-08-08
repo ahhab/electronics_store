@@ -1,5 +1,6 @@
-from products import Product
 from typing import List, Tuple
+from products import Product
+
 
 class Store:
     """
@@ -68,8 +69,8 @@ class Store:
                 purchase_price = product.buy(quantity)
                 total_price += purchase_price
                 print(f"Purchased {quantity} of {product.name}.")
-            except ValueError as e:
-                print(f"Order failed for {product.name}: {e}")
+            except ValueError as exception_value:
+                print(f"Order failed for {product.name}: {exception_value}")
                 # Depending on requirements, you might want to stop the whole order
                 # or just skip the failed item. Here we skip it.
 

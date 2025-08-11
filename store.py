@@ -14,12 +14,19 @@ class Store:
         Args:
             products (List[Product]): A list of Product objects to stock the store with.
         """
+        if not isinstance(products, list):
+            raise TypeError("Input products must be a list.")
+        for product in products:
+            if not isinstance(product, Product):
+                raise TypeError("All items in the list must be of type Product.")
         self.products = products
 
     def add_product(self, product: Product):
         """
         Adds a product to the store.
         """
+        if not isinstance(product, Product):
+            raise TypeError("Input product must be of type Product.")
         self.products.append(product)
         print(f"Added {product.name} to the store.")
 
@@ -27,6 +34,8 @@ class Store:
         """
         Removes a product from the store.
         """
+        if not isinstance(product, Product):
+            raise TypeError("Input product must be of type Product.")
         if product in self.products:
             self.products.remove(product)
             print(f"Removed {product.name} from the store.")

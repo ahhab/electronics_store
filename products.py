@@ -15,6 +15,12 @@ class Product:
         Raises:
             ValueError: If the name is empty, or if price or quantity are negative.
         """
+        if not isinstance(name, str):
+            raise TypeError("Product name must be a string.")
+        if not isinstance(price, float):
+            raise TypeError("Product price must be a float.")
+        if not isinstance(quantity, int):
+            raise TypeError("Product quantity must be an integer.")
         if not name:
             raise ValueError("Product name cannot be empty.")
         if price < 0:
@@ -25,7 +31,7 @@ class Product:
         self.name = name
         self.price = price
         self.quantity = quantity
-        self.active = True
+        self.active = quantity > 0
 
     def get_quantity(self) -> int:
         """
@@ -48,6 +54,8 @@ class Product:
         Raises:
             ValueError: If the provided quantity is negative.
         """
+        if not isinstance(quantity, int):
+            raise TypeError("Quantity must be an integer.")
         if quantity < 0:
             raise ValueError("Quantity cannot be set to a negative number.")
 
@@ -101,6 +109,8 @@ class Product:
             ValueError: If the product is inactive, the purchase quantity is not positive,
                         or if there is not enough stock.
         """
+        if not isinstance(quantity, int):
+            raise TypeError("Purchase quantity must be an integer.")
         if not self.is_active():
             raise ValueError(f"Cannot buy {self.name} as it is currently inactive.")
 
@@ -121,45 +131,3 @@ class Product:
         return total_price
 
 
-# --- Example Usage ---
-if __name__ == "__main__":
-    try:
-        # Create a product
-        macbook = Product("MacBook Air M2", 1450.00, 100)
-        print(macbook.show())
-        print(f"Is active? {macbook.is_active()}")
-        print("-" * 20)
-
-        # Buy some
-        macbook.buy(5)
-        print(macbook.show())
-        print("-" * 20)
-
-        # Buy the rest
-        macbook.buy(95)
-        print(macbook.show())
-        print(f"Is active? {macbook.is_active()}")
-        print("-" * 20)
-
-        # Try to buy more (should fail)
-        try:
-            macbook.buy(1)
-        except ValueError as e:
-            print(f"Error: {e}")
-        print("-" * 20)
-
-        # Manually reactivate and restock
-        macbook.activate()
-        macbook.set_quantity(50)
-        print(macbook.show())
-        print(f"Is active? {macbook.is_active()}")
-        print("-" * 20)
-
-        # Try to create an invalid product (should fail)
-        try:
-            invalid_product = Product("", -100, -5)
-        except ValueError as e:
-            print(f"Error creating product: {e}")
-
-    except ValueError as e:
-        print(f"An error occurred: {e}")

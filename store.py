@@ -18,7 +18,8 @@ class Store:
             raise TypeError("Input products must be a list.")
         for product in products:
             if not isinstance(product, Product):
-                raise TypeError("All items in the list must be of type Product.")
+                raise TypeError(
+                    "All items in the list must be of type Product.")
         self.products = products
 
     def add_product(self, product: Product):

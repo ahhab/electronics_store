@@ -112,7 +112,8 @@ class Product:
         if not isinstance(quantity, int):
             raise TypeError("Purchase quantity must be an integer.")
         if not self.is_active():
-            raise ValueError(f"Cannot buy {self.name} as it is currently inactive.")
+            raise ValueError(
+                f"Cannot buy {self.name} as it is currently inactive.")
 
         if quantity <= 0:
             raise ValueError("Purchase quantity must be a positive number.")
@@ -127,7 +128,6 @@ class Product:
         # Update the quantity
         self.set_quantity(self.quantity - quantity)
 
-        print(f"Purchase successful! Total for {quantity} of {self.name}: ${total_price:.2f}")
+        print(
+            f"Purchase successful! Total for {quantity} of {self.name}: ${total_price:.2f}")
         return total_price
-
-
